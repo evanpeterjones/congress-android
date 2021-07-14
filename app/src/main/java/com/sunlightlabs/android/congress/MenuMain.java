@@ -42,36 +42,17 @@ public class MenuMain extends Activity implements ActionBarUtils.HasActionMenu {
 			showChangelog();
 		}
 	}
-	
+
 	public void setupControls() {
 		setupDebugBar();
-		
-		findViewById(R.id.about).setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) { showAbout(); }
-		});
-		
-		findViewById(R.id.review).setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) { goReview(); }
-		});
-		
-		findViewById(R.id.feedback).setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) { doFeedback(); }
-		});
-		
+
+		findViewById(R.id.about).setOnClickListener(v -> showAbout());
+		findViewById(R.id.review).setOnClickListener(v -> goReview());
+		findViewById(R.id.feedback).setOnClickListener(v -> doFeedback());
+
 		ActionBarUtils.setTitle(this, R.string.app_name, null);
-		
-		ActionBarUtils.setActionButton(this, R.id.action_2, R.drawable.notifications, new View.OnClickListener() {
-			public void onClick(View v) { 
-				startActivity(new Intent(MenuMain.this, NotificationTabs.class)); 
-			}
-		});
-		
-		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.search, new View.OnClickListener() {
-			public void onClick(View v) { 
-				onSearchRequested();
-			}
-		});
-		
+		ActionBarUtils.setActionButton(this, R.id.action_2, R.drawable.notifications, v->startActivity(new Intent(MenuMain.this, NotificationTabs.class)));
+		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.search, v->onSearchRequested());
 		ActionBarUtils.setActionMenu(this, R.menu.main);
 	}
 	
