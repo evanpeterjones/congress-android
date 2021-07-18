@@ -18,17 +18,19 @@ public class CommitteeService {
         return find(committee_id, null);
     }
 
+    private static String find_chamber(String committee_id)
+    {
+        switch (committee_id.toLowerCase().charAt(0)) {
+            case 'h' : return "house";
+            case 's' : return "senate";
+            default: return "join";
+        }
+    }
+
     // /{congress}/{chamber}/committees/{committee_id}.json
     // /{congress}/{chamber}/committees/{committee_id}/subcommittees/{subcommittee_id}.json
 	public static Committee find(String committee_id, String subcommittee_id) throws CongressException {
-        String chamber;
-        if (committee_id.toLowerCase().startsWith("h"))
-            chamber = "house";
-        else if (committee_id.toLowerCase().startsWith("s"))
-            chamber = "senate";
-        else
-            chamber = "joint";
-
+        String chamber = find_chamber(committee_id);
         String congress = String.valueOf(Bill.currentCongress());
 
         // slightly awkward conditional because of limits on String[] initializer syntax

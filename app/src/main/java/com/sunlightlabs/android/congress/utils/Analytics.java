@@ -24,10 +24,7 @@ import java.util.Map;
 public class Analytics {
 
     // in onCreate(), ensure trackers are created and configured for that activity
-    public static void init(Activity activity) {
-        if (analyticsEnabled(activity))
-            ((CongressApp) activity.getApplication()).appTracker();
-    }
+    public static void init(Activity activity) { }
 
     // in onStart(), start auto-tracking with any previously initialized trackers
     public static void start(Activity activity) {
@@ -74,7 +71,7 @@ public class Analytics {
                 .setLabel(label)
             ).build();
 
-            ((CongressApp) activity.getApplication()).appTracker().send(event);
+            //((CongressApp) activity.getApplication()).send(event);
 		}
 	}
 	

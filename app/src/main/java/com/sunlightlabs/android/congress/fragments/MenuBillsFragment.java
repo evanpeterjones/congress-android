@@ -16,11 +16,13 @@ import com.sunlightlabs.android.congress.utils.Database;
 import com.sunlightlabs.android.congress.utils.Utils;
 import com.sunlightlabs.congress.models.Bill;
 
+import org.w3c.dom.Text;
+
 public class MenuBillsFragment extends ListFragment {
-	
+
 	private Database database;
 	private Cursor cursor;
-	
+
 	public static MenuBillsFragment newInstance() {
 		MenuBillsFragment frag = new MenuBillsFragment();
 		frag.setRetainInstance(true);
@@ -32,7 +34,6 @@ public class MenuBillsFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setupDatabase();
 	}
 	

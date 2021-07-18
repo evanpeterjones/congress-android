@@ -94,8 +94,7 @@ public class NotificationService extends WakefulIntentService {
 			boolean sometimesConsiderNew = getResources().getString(R.string.debug_sometimes_consider_new).equals("true");
 			int sometimesOften = 10; // how often to flag something as artificially new
 			
-			int size = updates.size();
-			for (int i=0; i<size; i++) {
+			for (int i=0; i<updates.size(); i++) {
 				String itemId = subscriber.decodeId(updates.get(i));
 				if (alwaysConsiderNew || (sometimesConsiderNew && (i % sometimesOften == 0)) || !database.hasSubscriptionItem(subscription.id, subscription.notificationClass, itemId))
 					unseenIds.add(itemId);

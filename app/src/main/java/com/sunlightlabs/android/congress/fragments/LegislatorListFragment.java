@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sunlightlabs.android.congress.R;
 import com.sunlightlabs.android.congress.tasks.LoadPhotoTask;
@@ -41,8 +42,8 @@ public class LegislatorListFragment extends ListFragment implements LoadPhotoTas
 	public static final int SEARCH_LASTNAME = 3;
 	public static final int SEARCH_COMMITTEE = 4;
 	public static final int SEARCH_COSPONSORS = 5;
-	public static final int SEARCH_CHAMBER = 6; 
-	
+	public static final int SEARCH_CHAMBER = 6;
+
 	List<Legislator> legislators;
 	Map<String,LoadPhotoTask> loadPhotoTasks = new HashMap<String,LoadPhotoTask>();
 	
@@ -142,11 +143,7 @@ public class LegislatorListFragment extends ListFragment implements LoadPhotoTas
 	}
 	
 	public void setupControls() {
-		getView().findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				refresh();
-			}
-		});
+		getView().findViewById(R.id.refresh).setOnClickListener(v -> refresh());
 
 		if (type == SEARCH_COSPONSORS)
 			FragmentUtils.setLoading(this, R.string.legislators_loading_cosponsors);
@@ -171,8 +168,30 @@ public class LegislatorListFragment extends ListFragment implements LoadPhotoTas
 	}
 	
 	public void onLoadLegislators(CongressException exception) {
-		if (isAdded())
-			FragmentUtils.showRefresh(this, R.string.legislators_error);
+		if (isAdded()) {
+			String error_message;
+
+			switch (type)
+			{
+				case SEARCH_STATE:
+					error_message = getString(R.string.state_loading_error);
+					break;
+				case SEARCH_COMMITTEE:
+					error_message = getString(R.string.committees_loading_error);
+					break;
+				case SEARCH_COSPONSORS:
+					error_message = getString(R.string.cosponsor_loading_error);
+					break;
+				case SEARCH_CHAMBER:
+					error_message = getString(R.string.chamber_loading_error);
+					break;
+				default:
+					error_message = getString(R.string.generic_loading_error);
+					break;
+			}
+
+			FragmentUtils.showRefresh(this, error_message);
+		}
 	}
 
 	public void displayLegislators() {

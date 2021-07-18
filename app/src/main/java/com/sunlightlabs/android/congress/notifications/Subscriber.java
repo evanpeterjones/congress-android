@@ -13,6 +13,7 @@ public abstract class Subscriber {
 	
 	public Subscriber() {}
 
+
 	// must return results in order of most recent first
 	public abstract List<?> fetchUpdates(Subscription subscription);
 	
