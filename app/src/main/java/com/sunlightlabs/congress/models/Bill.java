@@ -182,6 +182,8 @@ public class Bill implements Serializable {
 		return "https://www.govtrack.us/congress/bills/" + congress + "/" + bill_type + number + "/text";
 	}
 
+//	public String govtrack
+
 	// TODO: this may not be necessary anymore
 	public static String formatSummary(String summary, String short_title) {
 		String formatted = summary;

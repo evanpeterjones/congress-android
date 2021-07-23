@@ -73,12 +73,8 @@ public class BillPager extends Activity implements HasActionMenu {
 		findViewById(android.R.id.empty).setVisibility(View.VISIBLE);
 		findViewById(R.id.pager_container).setVisibility(View.GONE);
 		Utils.setLoading(this, R.string.bill_loading);
-		
-		findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				refresh();
-			}
-		});
+
+		findViewById(R.id.refresh).setOnClickListener((View view) -> refresh());
 	}
 	
 	private void refresh() {
@@ -128,14 +124,9 @@ public class BillPager extends Activity implements HasActionMenu {
 	}
 	
 	public void setupButtons() {
-		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.star_off, new View.OnClickListener() {
-			public void onClick(View v) { 
-				toggleDatabaseFavorite(); 
-			}
-		});
-		
+		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.star_off, (View view) -> toggleDatabaseFavorite());
+
 		toggleFavoriteStar(cursor.getCount() == 1);
-		
 		ActionBarUtils.setActionMenu(this, R.menu.bill);
 	}
 	
